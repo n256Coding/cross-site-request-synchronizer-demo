@@ -1,4 +1,4 @@
-package com.coding.crosssiterequestsynchronizerdemo;
+package com.n256coding.crosssiterequestsynchronizerdemo;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

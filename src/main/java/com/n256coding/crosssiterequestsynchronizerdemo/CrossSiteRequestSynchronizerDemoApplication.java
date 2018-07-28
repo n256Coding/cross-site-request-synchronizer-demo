@@ -1,4 +1,4 @@
-package com.coding.crosssiterequestsynchronizerdemo;
+package com.n256coding.crosssiterequestsynchronizerdemo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
