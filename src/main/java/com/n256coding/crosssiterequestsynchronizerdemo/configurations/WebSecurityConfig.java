@@ -1,6 +1,5 @@
 package com.n256coding.crosssiterequestsynchronizerdemo.configurations;
 
-import com.n256coding.crosssiterequestsynchronizerdemo.models.SessionStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,11 +8,10 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.context.request.RequestContextHolder;
 
 @Configuration
 @EnableWebSecurity
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     AuthenticationSuccessHandler successHandler;
@@ -22,15 +20,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/home", "/")
-                .authenticated()
+                    .authenticated()
                 .and()
                 .formLogin()
                     .loginPage("/login")
                     .successHandler(successHandler)
-                    .permitAll();
-//                .and()
-//                .logout()
-//                    .permitAll();
+                .permitAll();
 
         //I have manually implemented this function
         http.csrf().disable();
@@ -45,6 +40,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+        return new BCryptPasswordEncoder();             //Encode the password so that it will not readable meaningfully
     }
 }
